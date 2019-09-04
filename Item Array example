@@ -1,0 +1,112 @@
+import keyboard
+import os
+from time import sleep
+clear = lambda: os.system('cls') #on Windows System
+
+
+##ItemLists
+Ranged_Weapons ={'001': {'Name':'Bow','Type':'Ranged_Weapon','Damage': 90,'Description':'Just a standard Bow','Weight':50,'accuracy': 100,'Cost':50,'MaxAmmount':1,'MinAmmo':0,'MaxAmmo':1,'MaxAmmoRes':7},
+                 '002': {'Name':'Bow','Damage': 5,'Description':'Just a standard Bow','Weight':50,'accuracy': 100,'Cost':50,'MaxAmmount':1,'MinAmmo':0,'MaxAmmo':1,'MaxAmmoRes':7},
+                 '003': {'Name':'Bow','Damage': 5,'Description':'Just a standard Bow','Weight':50,'accuracy': 100,'Cost':50,'MaxAmmount':1,'MinAmmo':0,'MaxAmmo':1,'MaxAmmoRes':7}}
+
+Items={'001': {'Name':'Silver_Key','Type':'Item','Description':'Just a standard Key','Weight':0.01,'Cost':0,'MaxAmmount':99,}}
+
+##Keys
+Right_Key="right"
+Left_Key="left"
+Eqipped_Info_Key='e'
+Exit_Key='esc'
+##KeysForInfo
+CurrentItem =Ranged_Weapons['001']
+CurrentItem_Name=CurrentItem['Name']
+CurrentItem_Type=CurrentItem['Type']
+CurrentItem_Damage=CurrentItem['Damage']
+CurrentItem_Description=CurrentItem['Description']
+CurrentItem_Weight=CurrentItem['Weight']
+CurrentItem_Cost=CurrentItem['Cost']
+
+print("Damage",CurrentItem_Description)
+Closed_Question=["Yes","No"] 
+state="Normal"
+def Current_Item_Info():
+    global CurrentItem_Name
+    global CurrentItem_Type
+    global CurrentItem_Damage
+    global CurrentItem_Description
+    global CurrentItem_Weight
+    print("Name:",CurrentItem_Name)
+    print("Type:",CurrentItem_Type)
+    print("Description:",CurrentItem_Description)
+    print("Weight:",CurrentItem_Weight)
+    print("Damage:",CurrentItem_Damage)
+    print("Cost:",CurrentItem_Cost)
+    sleep(1.5)
+    clear()
+    Display()
+
+def Display():
+    print("  __          __  _                          ")
+    print("  \ \        / / | |                         ")
+    print("   \ \  /\  / /__| | ___ ___  _ __ ___   ___ ")
+    print("    \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \ ")
+    print("     \  /\  /  __/ | (_| (_) | | | | | |  __/")
+    print("      \/  \/ \___|_|\___\___/|_| |_| |_|\___|")
+    
+    
+                                         
+    
+def Button_Pressed(event):
+    global Eqipped_Info_Key
+    global Exit_Key
+    global Left_Key
+    global Right_Key
+    global Closed_Question
+    if state=="Normal":
+        if event.name == Eqipped_Info_Key:
+            Current_Item_Info()
+        elif event.name == Exit_Key:
+            Exit(event)
+    elif state=="Exit_Screen":
+        
+        if event.name == Left_Key:
+            Closed_Question=0
+            if event.name == 'enter':
+                clear()
+        elif event.name == Right_Key:
+            Closed_Question=1
+            if event.name == 'enter':
+                print("no")
+
+        
+        
+def Exit():
+    global Closed_Question
+    global Right_Key
+    global Left_Key
+    
+    print("                     __     __            _____                  ___  ")
+    print("     /\              \ \   / /           / ____|                |__ \ ")
+    print("    /  \   _ __ ___   \ \_/ /__  _   _  | (___  _   _ _ __ ___     ) |")
+    print("   / /\ \ | '__/ _ \   \   / _ \| | | |  \___ \| | | | '__/ _ \   / / ")
+    print("  / ____ \| | |  __/    | | (_) | |_| |  ____) | |_| | | |  __/  |_|  ")
+    print(" /_/    \_\_|  \___|    |_|\___/ \__,_| |_____/ \__,_|_|  \___|  (_)  ")
+    print("  _____     ________  _____ ___     ___ _   _  ____ ___               ")
+    print(" |  _\ \   / /  ____|/ ____|_  |   |  _| \ | |/ __ \_  |              ")
+    print(" | |  \ \_/ /| |__  | (___   | |   | | |  \| | |  | || |              ")
+    print(" | |   \   / |  __|  \___ \  | |   | | | . ` | |  | || |              ")
+    print(" | |    | |  | |____ ____) | | |   | | | |\  | |__| || |              ")
+    print(" | |_   |_|  |______|_____/ _| |   | |_|_| \_|\____/_| |              ")
+    print(" |___|                     |___|   |___|           |___|     ")
+    state="Exit_Screen"
+
+
+
+
+
+keyboard.on_press(Button_Pressed)
+
+while True:
+    pass
+
+
+
